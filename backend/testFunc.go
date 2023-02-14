@@ -52,4 +52,8 @@ func init() {
 		return num.(int) > 0
 	})
 
+	govalidator.CustomTypeTagMap.Set("PositiveFloat", func(i interface{}, context interface{}) bool {
+		return i.(float32) >= 0
+	})
+
 }
