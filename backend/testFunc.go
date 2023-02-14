@@ -22,16 +22,16 @@ func init() {
 		return true
 	})
 
-	govalidator.CustomTypeTagMap.Set("notFuter", func(i interface{}, complex interface{} )bool{
-		timenew,ok := i.(time.Time)
+	govalidator.CustomTypeTagMap.Set("notFuter", func(i interface{}, complex interface{}) bool {
+		timenew, ok := i.(time.Time)
 		if !ok {
 			return false
 		}
 		return timenew.After(time.Now())
-	} )
+	})
 
-	govalidator.CustomTypeTagMap.Set("TimeNotPast", func(i interface{}, complex interface{}) bool{
-		timenew,ok := i.(time.Time)
+	govalidator.CustomTypeTagMap.Set("TimeNotPast", func(i interface{}, complex interface{}) bool {
+		timenew, ok := i.(time.Time)
 
 		if !ok {
 			return false
@@ -39,11 +39,17 @@ func init() {
 		return timenew.Before(time.Now())
 	})
 
-	govalidator.CustomTypeTagMap.Set("CurrentTime" , func(i interface{}, complex interface{}) bool {
+	govalidator.CustomTypeTagMap.Set("CurrentTime", func(i interface{}, complex interface{}) bool {
 		timenew, ok := i.(time.Time)
-		if !ok{
+		if !ok {
 			return false
 		}
 		return timenew.Equal(time.Now())
 	})
+
+	govalidator.CustomTypeTagMap.Set("PositiveInt", func(i interface{}, context interface{}) bool {
+		num := i
+		return num.(int) > 0
+	})
+
 }
